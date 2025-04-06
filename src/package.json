@@ -1,0 +1,21 @@
+{
+  "name": "player-info-api-server",
+  "dependencies": {
+    "@citizenfx/client": "^2.0.14033-1",
+    "@citizenfx/server": "^2.0.14033-1",
+    "dotenv": "^16.4.7",
+    "node-fetch": "^3.3.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.0",
+    "cross-env": "^7.0.3",
+    "esbuild": "^0.25.2",
+    "rimraf": "^6.0.1"
+  },
+  "scripts": {
+    "build": "npm run clearbuild && node build-bundle.js",
+    "clearbuild": "rimraf ../dist",
+    "typecheck": "tsc --noEmit -p client/tsconfig.json && tsc --noEmit -p server/tsconfig.json",
+    "watch": "npm run clearbuild && cross-env IS_WATCH_MODE=1 node build-bundle.js"
+  }
+}

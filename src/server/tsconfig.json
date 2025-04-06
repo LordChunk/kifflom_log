@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "module": "esnext",
+    "target": "es2021",
+    "lib": ["es2021"],
+    "strict": true,
+    "esModuleInterop": true,
+    "moduleResolution": "bundler",
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "types": ["@citizenfx/server", "@types/node" ],
+  },
+  "include": ["./**/*"],
+  "exclude": ["**/node_modules", "**/__tests__/*"]
+}
