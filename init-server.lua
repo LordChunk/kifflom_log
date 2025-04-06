@@ -60,14 +60,10 @@ local resourceName = GetCurrentResourceName()
 -- Create a proxy for export creation
 exports = setmetatable({}, {
   __call = function(_, functionName, exportFunction)
-    -- Log when an export is created
-    -- print(string.format("Export created: %s:%s", resourceName, functionName))
-
     -- Create a wrapped function that logs calls to this export
     local wrappedFunction = function(...)
       local invokingResource = GetInvokingResource() or 'unknown'
-      -- print(string.format("Export called: %s:%s from %s", resourceName, exportName, invokingResource))
-      -- lib.print.warn(...)
+
       local data = {
         resource = resourceName,
         function_name = functionName,
