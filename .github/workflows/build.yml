@@ -47,4 +47,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: kifflom_log-build
-        path: ./src/dist/
+        path: ./dist/
