@@ -3,7 +3,6 @@
   "dependencies": {
     "@citizenfx/client": "^2.0.14033-1",
     "@citizenfx/server": "^2.0.14033-1",
-    "dotenv": "^16.4.7",
     "node-fetch": "^3.3.2"
   },
   "devDependencies": {
