@@ -20,10 +20,10 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         name: ${{ needs.build.outputs.artifact_name }}
-        path: ./dist/
+        path: ./kifflom_log/
       
     - name: Create ZIP archive
-      run: zip -r kifflom_log-${{ github.ref_name }}.zip ./dist/
+      run: zip -r kifflom_log-${{ github.ref_name }}.zip ./kifflom_log/
 
     - name: Create GitHub Release
       id: create_release
