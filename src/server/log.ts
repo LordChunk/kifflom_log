@@ -8,16 +8,16 @@ interface LokiPayload {
 }
 
 /**
- * Logger class for sending logs to Grafana Loki
+ * Log class for sending logs to Grafana Loki
  */
-export class Logger {
+export class Log {
   private url: string;
   private token: string;
   private defaultLabels: Record<string, string>;
   private enabled: boolean;
   
   /**
-   * Constructor for Logger class
+   * Constructor for Log class
    * @param token Grafana Loki access token (injected from environment)
    * @param defaultLabels Default labels to include with every log
    * @param url Loki API endpoint URL (injected from environment)

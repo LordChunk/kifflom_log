@@ -68,8 +68,6 @@ The logger is configured through environment variables:
 - `GRAFANA_TOKEN`: Your Grafana Loki access token
 - `GRAFANA_URL`: The URL endpoint for your Grafana Loki instance
 
-Additional default labels can be configured in the `Logger` constructor in `logger.ts`.
-
 ## How It Works
 
 Kifflom Log works by monkey-patching the FiveM server's event handling system:
