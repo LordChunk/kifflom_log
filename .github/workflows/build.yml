@@ -8,43 +8,4 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v4
-    
-    - name: Set up Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '22'
-        cache: 'npm'
-        cache-dependency-path: './src/package.json'
-        
-    - name: Install dependencies
-      run: npm ci
-      working-directory: ./src
-
-    - name: Build
-      run: npm run build
-      working-directory: ./src
-
-    - name: Copy init-server.lua to dist/init-server.lua
-      run: cp init-server.lua dist/init-server.lua
-
-    - name: Copy fxmanifest.lua to dist/fxmanifest.lua
-      run: cp fxmanifest.lua dist/fxmanifest.lua
-
-    - name: Replace dist/server/*.js with server/*.js in fxmanifest.lua
-      run: sed -i 's|dist/server/|server/|g' dist/fxmanifest.lua
-
-    - name: Copy all *.md files to dist
-      run: cp *.md dist/
-
-    - name: Copy LICENSE to dist/LICENSE
-      run: cp LICENSE dist/LICENSE
-
-    - name: Upload dist folder
-      uses: actions/upload-artifact@v4
-      with:
-        name: kifflom_log-build
-        path: ./dist/
+    uses: ./.github/workflows/reusable-build.yml
