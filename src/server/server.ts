@@ -1,7 +1,4 @@
 import { Log } from "./log";
-import { Log } from "./log";
-
-console.log("Server script in Node 22!");
 
 interface IEventCall {
   event: string;
