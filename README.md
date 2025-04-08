@@ -10,8 +10,6 @@ Kifflom Logger is a logging plugin for FiveM servers that integrates with Grafan
 - **Export Call Monitoring**: Tracks all server-side export function calls between resources
 - **Grafana Loki Integration**: Send logs to Grafana Loki for advanced querying and visualization
 - **Detailed Context**: Captures source player ID, citizen ID (Qbox), invoking resource, and arguments
-- **Error Tracking**: Records errors that occur during event handling
-- **Convenient Log Levels**: Support for info, warn, error, and debug log levels
 
 ## Requirements
 
