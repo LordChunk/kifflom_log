@@ -37,7 +37,7 @@ local function monkeyPatchEventHandler(originalFunc, event, callback)
       end
     end
 
-    TriggerEvent('kifflom-logger:server:event:trigger', data, ...)
+    TriggerEvent('kifflom-log:server:event:trigger', data, ...)
   end
 
   -- Register with the wrapped callback
@@ -71,7 +71,7 @@ exports = setmetatable({}, {
       }
 
       pcall(function(...)
-        TriggerEvent('kifflom-logger:server:export:call', data, ...)
+        TriggerEvent('kifflom_log:server:export:call', data, ...)
       end, ...)
 
       -- Call the original export function and return its results

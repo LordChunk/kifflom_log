@@ -1,8 +1,8 @@
-# Kifflom Logger - FiveM Plugin
+# Kifflom Log - FiveM Plugin
 
 ## Overview
 
-Kifflom Logger is a logging plugin for FiveM servers that integrates with Grafana Loki. It automatically captures and logs network events and export calls from your server resources, providing detailed insights for debugging and monitoring.
+Kifflom Log is a logging plugin for FiveM servers that integrates with Grafana Loki. It automatically captures and logs network events and export calls from your server resources, providing detailed insights for debugging and monitoring.
 
 ### Features
 
@@ -21,12 +21,12 @@ Kifflom Logger is a logging plugin for FiveM servers that integrates with Grafan
 1. Clone the repository into your FiveM server resources folder:
    ```bash
    cd resources
-   git clone https://github.com/lordchunk/kifflom_logger
+   git clone https://github.com/lordchunk/kifflom_log
    ```
 
 2. Navigate to the project directory:
    ```bash
-   cd kifflom_logger
+   cd kifflom_log
    ```
 
 3. Install dependencies:
@@ -48,15 +48,15 @@ Kifflom Logger is a logging plugin for FiveM servers that integrates with Grafan
 
 6. Add the resource to your server configuration:
    ```
-   ensure kifflom_logger
+   ensure kifflom_log
    ```
 
 To enable logging for your resource, add the following to your `fxmanifest.lua`:
 
 ```lua
--- Include Kifflom Logger
+-- Include Kifflom Log
 server_scripts {
-    '@kifflom_logger/server-init.lua',
+    '@kifflom_log/server-init.lua',
     ... 
 }
 ```
@@ -72,7 +72,7 @@ Additional default labels can be configured in the `Logger` constructor in `logg
 
 ## How It Works
 
-Kifflom Logger works by monkey-patching the FiveM server's event handling system:
+Kifflom Log works by monkey-patching the FiveM server's event handling system:
 
 1. It intercepts all event registrations and wraps callbacks in logging functionality
 2. It captures export function calls across resources
