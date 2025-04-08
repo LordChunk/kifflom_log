@@ -15,7 +15,6 @@ Kifflom Logger is a logging plugin for FiveM servers that integrates with Grafan
 
 - FiveM server with Node.js 22 support
 - Grafana Loki instance
-- `ox_lib` dependency
 
 ## Installation
 
