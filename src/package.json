@@ -1,5 +1,4 @@
 {
-  "name": "player-info-api-server",
   "dependencies": {
     "@citizenfx/client": "^2.0.14033-1",
     "@citizenfx/server": "^2.0.14033-1",

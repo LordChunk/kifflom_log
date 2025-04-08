@@ -37,7 +37,7 @@ local function monkeyPatchEventHandler(originalFunc, event, callback)
       end
     end
 
-    TriggerEvent('kifflom-log:server:event:trigger', data, ...)
+    TriggerEvent('kifflom_log:server:event:trigger', data, ...)
   end
 
   -- Register with the wrapped callback
