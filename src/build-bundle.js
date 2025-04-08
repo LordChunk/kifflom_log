@@ -2,10 +2,6 @@ const esbuild = require("esbuild");
 
 const IS_WATCH_MODE = process.env.IS_WATCH_MODE;
 
-// Get environment variables for injection
-const GRAFANA_TOKEN = process.env.GRAFANA_TOKEN || '';
-const GRAFANA_URL = process.env.GRAFANA_URL || '';
-
 const TARGET_ENTRIES = [
   {
     target: "node22",
@@ -13,11 +9,11 @@ const TARGET_ENTRIES = [
     platform: "node",
     outfile: "../dist/server/server.js",
   },
-  {
-    target: "es2020",
-    entryPoints: ["client/client.ts"],
-    outfile: "../dist/client/client.js",
-  },
+  // {
+  //   target: "es2020",
+  //   entryPoints: ["client/client.ts"],
+  //   outfile: "../dist/client/client.js",
+  // },
 ];
 
 if (IS_WATCH_MODE) {
