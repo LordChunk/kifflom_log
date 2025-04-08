@@ -37,8 +37,8 @@ jobs:
     - name: Replace dist/server/*.js with server/*.js in fxmanifest.lua
       run: sed -i 's|dist/server/|server/|g' dist/fxmanifest.lua
 
-    - name: Copy README.md to dist/README.md
-      run: cp README.md dist/README.md
+    - name: Copy all *.md files to dist
+      run: cp *.md dist/
 
     - name: Copy LICENSE to dist/LICENSE
       run: cp LICENSE dist/LICENSE
