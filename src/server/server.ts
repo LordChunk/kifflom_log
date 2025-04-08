@@ -21,12 +21,12 @@ const logger = new Logger(
   process.env.GRAFANA_URL || "",
   {
     fivem_environment: "development",
-    service_name: "kifflom-logs",
+    service_name: "kifflom-logger",
   },
 );
 
 AddEventHandler(
-  "kifflom-logs:server:event:trigger",
+  "kifflom-logger:server:event:trigger",
   async (data: IEventCall, ...args: any[]) => {
     const { event, source, citizen_id, invoking_resource, error } = data;
 
@@ -61,7 +61,7 @@ AddEventHandler(
 );
 
 AddEventHandler(
-  "kifflom-logs:server:export:call",
+  "kifflom-logger:server:export:call",
   async (data: IExportCall, ...args: any[]) => {
     const { resource, function_name, invoking_resource } = data;
 
