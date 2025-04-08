@@ -38,11 +38,6 @@ const buildBundle = async () => {
         '.node': 'file',
       },
       plugins: [],
-      define: {
-        // Inject environment variables as constants during build time
-        'process.env.GRAFANA_TOKEN': JSON.stringify(GRAFANA_TOKEN),
-        'process.env.GRAFANA_URL': JSON.stringify(GRAFANA_URL),
-      },
     };
 
     if (IS_WATCH_MODE) {
