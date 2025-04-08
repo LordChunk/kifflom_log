@@ -1,5 +1,4 @@
 const esbuild = require("esbuild");
-require('dotenv').config();
 
 const IS_WATCH_MODE = process.env.IS_WATCH_MODE;
 

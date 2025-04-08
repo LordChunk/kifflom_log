@@ -34,39 +34,30 @@ Kifflom Log is a logging plugin for FiveM servers that integrates with Grafana L
    npm install
    ```
 
-4. Configure environment variables by copying the example file and updating the values:
-   ```bash
-   cp .env.example .env
-   ```
-   Then edit the `.env` file and fill in your actual values.
-
-
-5. Build the project:
+4. Build the project:
    ```bash
    npm run build
    ```
 
-6. Add the resource to your server configuration:
+5. Add the resource to your `server.cfg` configuration. Kifflom Log should be started before any other resources that you want to log:
    ```
+   # Kifflom Log Configuration
+   set kifflom:log:grafana_token "YOUR_GRAFANA_TOKEN"
+   set kifflom:log:grafana_url "YOUR_GRAFANA_LOKI_URL"
+
    ensure kifflom_log
+   
+   ... start other resources
    ```
 
-To enable logging for your resource, add the following to your `fxmanifest.lua`:
+6. To enable logging for your resource, add the following to the <i>start</i> of your `fxmanifest.lua`:
 
-```lua
--- Include Kifflom Log
-server_scripts {
-    '@kifflom_log/server-init.lua',
-    ... 
-}
-```
-
-## Configuration
-
-The logger is configured through environment variables:
-
-- `GRAFANA_TOKEN`: Your Grafana Loki access token
-- `GRAFANA_URL`: The URL endpoint for your Grafana Loki instance
+   ```lua
+   server_scripts {
+      '@kifflom_log/server-init.lua',
+      ... 
+   }
+   ```
 
 ## How It Works
 

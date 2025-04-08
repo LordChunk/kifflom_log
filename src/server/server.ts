@@ -1,7 +1,5 @@
 import { Log } from "./log";
 
-console.log("Server script in Node 22!");
-
 interface IEventCall {
   event: string;
   source?: string;
@@ -17,8 +15,8 @@ interface IExportCall {
 }
 
 const log = new Log(
-  process.env.GRAFANA_TOKEN || "",
-  process.env.GRAFANA_URL || "",
+  GetConvar("kifflom:log:grafana_token", ""),
+  GetConvar("kifflom:log:grafana_url", ""),
   {
     fivem_environment: "development",
     service_name: "kifflom_log",
