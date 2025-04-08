@@ -45,16 +45,6 @@ const buildBundle = async () => {
     } else {
       baseOptions.minifyWhitespace = true;
       baseOptions.minifyIdentifiers = false;
-
-      // Configure Sentry plugin
-      baseOptions.sourcemap = true;
-      // baseOptions.plugins.push(
-      //   sentryEsbuildPlugin({
-      //     authToken: process.env.SENTRY_AUTH_TOKEN,
-      //     org: "chunks-org",
-      //     project: "fivem-rest-api",
-      //   })
-      // );
     }
 
     for (const targetOpts of TARGET_ENTRIES) {
