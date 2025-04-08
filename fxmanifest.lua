@@ -10,7 +10,6 @@ files {
 }
 
 server_scripts {
-  '@ox_lib/init.lua',
   'dist/server/*.js'
 }
 
