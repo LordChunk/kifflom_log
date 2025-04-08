@@ -1,4 +1,4 @@
-import { Logger } from "./logger";
+import { Log } from "./log";
 
 console.log("Server script in Node 22!");
 
@@ -16,7 +16,7 @@ interface IExportCall {
   invoking_resource: string;
 }
 
-const logger = new Logger(
+const log = new Log(
   process.env.GRAFANA_TOKEN || "",
   process.env.GRAFANA_URL || "",
   {
@@ -53,7 +53,7 @@ AddEventHandler(
       if (args.length > 0) metadata.args = JSON.stringify(args);
       metadata.isError = !!error;
 
-      await logger.info(logPayload, metadata);
+      await log.info(logPayload, metadata);
     } catch (err) {
       console.error("Error logging event:", err);
     }
@@ -66,7 +66,7 @@ AddEventHandler(
     const { resource, function_name, invoking_resource } = data;
 
     try {
-      await logger.info(
+      await log.info(
         {
           event_type: 'export',
           resource,
