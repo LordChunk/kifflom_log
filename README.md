@@ -54,7 +54,7 @@ Kifflom Log is a logging plugin for FiveM servers that integrates with Grafana L
 
    ```lua
    server_scripts {
-      '@kifflom_log/server-init.lua',
+      '@kifflom_log/init-server.lua',
       ... 
    }
    ```
