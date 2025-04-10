@@ -29,7 +29,7 @@ local function monkeyPatchEventHandler(originalFunc, event, callback)
       local citizenId = nil
       if Player(source) and Player(source).state and Player(source).state.isLoggedIn then
         local player = exports['qbx_core']:GetPlayer(source)
-        citizenId = player?.PlayerData?.citizenid or nil
+        citizenId = player and player.PlayerData and player.PlayerData.citizenid or nil
 
         if citizenId then
           data.citizen_id = citizenId
