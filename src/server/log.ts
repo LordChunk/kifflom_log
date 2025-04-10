@@ -18,7 +18,7 @@ export class Log {
   private logBuffer: Map<string, { stream: Record<string, string>; values: [string, string][] }>;
   private flushInterval: NodeJS.Timeout | null;
   private flushTimeoutMs: number;
-  
+
   /**
    * Constructor for Log class
    * @param token Grafana Loki access token (injected from environment)
@@ -39,7 +39,7 @@ export class Log {
     this.logBuffer = new Map();
     this.flushInterval = null;
     this.flushTimeoutMs = flushTimeoutMs;
-    
+
     if (!this.enabled)
       console.warn('Logger initialized without proper credentials. Logging to Grafana Loki is disabled.');
     else {
@@ -47,7 +47,7 @@ export class Log {
       this.startFlushInterval();
     }
   }
-  
+
   /**
    * Start the interval timer to flush logs periodically
    */
@@ -58,7 +58,7 @@ export class Log {
       }, this.flushTimeoutMs);
     }
   }
-  
+
   /**
    * Stop the flush interval timer
    */
@@ -68,7 +68,7 @@ export class Log {
       this.flushInterval = null;
     }
   }
-  
+
   /**
    * Convert current timestamp to nanoseconds string format required by Loki
    */
@@ -82,31 +82,31 @@ export class Log {
   private stringifyMessage(message: unknown): string {
     return typeof message === 'string' ? message : JSON.stringify(message);
   }
-  
+
   /**
    * Get a unique key to represent a set of labels
    */
   private getLabelsKey(labels: Record<string, string>): string {
     return JSON.stringify(labels);
   }
-  
+
   /**
    * Add a log message to the buffer
    */
   private bufferLog(message: string, labels: Record<string, string>): void {
     const key = this.getLabelsKey(labels);
-    
+
     if (!this.logBuffer.has(key)) {
       this.logBuffer.set(key, {
         stream: labels,
         values: []
       });
     }
-    
+
     const stream = this.logBuffer.get(key)!;
     stream.values.push([this.getTimestampNs(), message]);
   }
-  
+
   /**
    * Flush all buffered logs to Loki
    */
@@ -116,15 +116,12 @@ export class Log {
     }
 
     console.log('Flushing logs to Loki:', this.logBuffer.size);
-    
+
     try {
       const payload: LokiPayload = {
         streams: Array.from(this.logBuffer.values())
       };
-      
-      // Clear the buffer before sending to avoid duplicate logs if sending fails
-      this.logBuffer.clear();
-      
+
       const response = await fetch(this.url, {
         method: 'POST',
         headers: {
@@ -133,15 +130,17 @@ export class Log {
         },
         body: JSON.stringify(payload)
       });
-      
+
       if (!response.ok) {
         throw new Error(`HTTP error ${response.status}: ${await response.text()}`);
       }
+
+      this.logBuffer.clear();
     } catch (error) {
       console.error('Failed to send aggregated logs to Loki:', error);
     }
   }
-  
+
   /**
    * Send a log message to Loki
    * @param message Log message to send
@@ -152,10 +151,10 @@ export class Log {
       console.warn('Logger is disabled. Skipping log message:', message);
       return;
     }
-    
+
     const labels = { ...this.defaultLabels, ...additionalLabels };
     const stringMessage = this.stringifyMessage(message);
-    
+
     // Add the log to the buffer instead of sending immediately
     this.bufferLog(stringMessage, labels);
   }
@@ -166,21 +165,21 @@ export class Log {
   async info(message: unknown, additionalLabels: Record<string, string> = {}): Promise<void> {
     return this.log(message, { ...additionalLabels, level: 'info' });
   }
-  
+
   /**
    * Convenience method for sending warning level logs
    */
   async warn(message: unknown, additionalLabels: Record<string, string> = {}): Promise<void> {
     return this.log(message, { ...additionalLabels, level: 'warn' });
   }
-  
+
   /**
    * Convenience method for sending error level logs
    */
   async error(message: unknown, additionalLabels: Record<string, string> = {}): Promise<void> {
     return this.log(message, { ...additionalLabels, level: 'error' });
   }
-  
+
   /**
    * Convenience method for sending debug level logs
    */
