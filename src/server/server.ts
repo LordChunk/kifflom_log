@@ -40,18 +40,17 @@ AddEventHandler(
       if (error) logPayload.error = error;
       if (args.length > 0) logPayload.args = args;
 
-      const metadata: Record<string, any> = {
+      const labels: Record<string, any> = {
         event_type: 'event',
         event
       };
 
-      if (source) metadata.source = source;
-      if (citizen_id) metadata.citizen_id = citizen_id;
-      if (invoking_resource) metadata.invoking_resource = invoking_resource;
-      if (args.length > 0) metadata.args = JSON.stringify(args);
-      metadata.isError = !!error;
+      if (source) labels.source = source;
+      if (citizen_id) labels.citizen_id = citizen_id;
+      if (invoking_resource) labels.invoking_resource = invoking_resource;
+      labels.isError = !!error;
 
-      await log.info(logPayload, metadata);
+      await log.info(logPayload, labels);
     } catch (err) {
       console.error("Error logging event:", err);
     }
@@ -77,7 +76,6 @@ AddEventHandler(
           resource,
           function_name,
           invoking_resource,
-          args: JSON.stringify(args),
         }
       );
     } catch (err) {
