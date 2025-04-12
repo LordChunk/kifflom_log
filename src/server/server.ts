@@ -15,8 +15,8 @@ interface IExportCall {
 }
 
 const log = new Log(
-  GetConvar("kifflom:log:grafana_token", ""),
   GetConvar("kifflom:log:grafana_url", ""),
+  GetConvar("kifflom:log:grafana_token", ""),
   {
     fivem_environment: "development",
     service_name: "kifflom_log",

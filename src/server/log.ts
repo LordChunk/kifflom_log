@@ -21,28 +21,28 @@ export class Log {
 
   /**
    * Constructor for Log class
-   * @param token Grafana Loki access token (injected from environment)
-   * @param defaultLabels Default labels to include with every log
    * @param url Loki API endpoint URL (injected from environment)
+   * @param token Grafana Loki access token (optional)
+   * @param defaultLabels Default labels to include with every log
    * @param flushTimeoutMs Time in milliseconds to wait before flushing logs (default: 2000ms)
    */
   constructor(
-    token: string,
     url: string,
+    token?: string,
     defaultLabels: Record<string, string> = { Language: 'NodeJS', source: 'Code' },
     flushTimeoutMs: number = 2000,
   ) {
     this.url = url;
-    this.token = token;
+    this.token = token || '';
     this.defaultLabels = defaultLabels;
-    this.enabled = Boolean(this.url && this.token);
+    this.enabled = this.url !== '';
     this.logBuffer = new Map();
     this.flushInterval = null;
     this.flushTimeoutMs = flushTimeoutMs;
 
-    if (!this.enabled)
-      console.warn('Logger initialized without proper credentials. Logging to Grafana Loki is disabled.');
-    else {
+    if (!this.enabled) {
+      console.warn('Logger initialized without proper URL. Logging to Grafana Loki is disabled.');
+    } else {
       console.log('Logger initialized.');
       this.startFlushInterval();
     }
@@ -115,19 +115,23 @@ export class Log {
       return;
     }
 
-    console.log('Flushing logs to Loki:', this.logBuffer.size);
-
     try {
       const payload: LokiPayload = {
         streams: Array.from(this.logBuffer.values())
       };
 
+      const headers: Record<string, string> = {
+        'Content-Type': 'application/json',
+      };
+
+      // Only add Authorization header if token exists and isn't empty
+      if (this.token && this.token.trim() !== '') {
+        headers['Authorization'] = `Bearer ${this.token}`;
+      }
+
       const response = await fetch(this.url, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${this.token}`
-        },
+        headers,
         body: JSON.stringify(payload)
       });
 
