@@ -1,0 +1,943 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 4,
+  "links": [],
+  "liveNow": true,
+  "panels": [
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "mariadb-kifflom"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 8,
+        "x": 0,
+        "y": 0
+      },
+      "id": 101,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "playerName",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.6.0",
+      "targets": [
+        {
+          "dataset": "kifflom",
+          "datasource": {
+            "type": "mysql",
+            "uid": "mariadb-kifflom"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  CONCAT (\n    JSON_UNQUOTE (JSON_EXTRACT (p.charinfo, '$.firstname')),\n    ' ',\n    JSON_UNQUOTE (JSON_EXTRACT (p.charinfo, '$.lastname'))\n  ) AS playerName\nFROM\n  players p\nWHERE\n  p.citizenid = '${player_citizenid}'",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "Player Name",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "mariadb-kifflom"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 8,
+        "x": 8,
+        "y": 0
+      },
+      "id": 102,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^citizenid$/",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.6.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "mariadb-kifflom"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT citizenid FROM players WHERE citizenid = '${player_citizenid}'",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "Citizen ID",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "mariadb-kifflom"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 8,
+        "x": 16,
+        "y": 0
+      },
+      "id": 103,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^license$/",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.6.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "mariadb-kifflom"
+          },
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT license FROM players WHERE citizenid = '${player_citizenid}'",
+          "refId": "A"
+        }
+      ],
+      "title": "License ID",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "mariadb-kifflom"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "currencyEUR"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 0,
+        "y": 3
+      },
+      "id": 104,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "11.6.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "mariadb-kifflom"
+          },
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT \n  'Cash' as Type, JSON_UNQUOTE(JSON_EXTRACT(p.money, '$.cash')) as Amount \nFROM players p WHERE p.citizenid = '${player_citizenid}'\nUNION ALL\nSELECT \n  'Bank' as Type, JSON_UNQUOTE(JSON_EXTRACT(p.money, '$.bank')) as Amount \nFROM players p WHERE p.citizenid = '${player_citizenid}'\nUNION ALL\nSELECT \n  'Savings' as Type, 0 as Amount \nFROM players p WHERE p.citizenid = '${player_citizenid}'",
+          "refId": "A"
+        }
+      ],
+      "title": "Balance",
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "mariadb-kifflom"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 16,
+        "x": 8,
+        "y": 3
+      },
+      "id": 105,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": false
+      },
+      "pluginVersion": "11.6.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "mariadb-kifflom"
+          },
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT \n  'Job' as `Key`, CONCAT(JSON_UNQUOTE(JSON_EXTRACT(p.job, '$.name')), ' (Grade: ', JSON_UNQUOTE(JSON_EXTRACT(p.job, '$.grade')), ')') as `Value` \nFROM players p \nWHERE p.citizenid = '${player_citizenid}'\nUNION ALL\nSELECT \n  'Gang' as `Key`, COALESCE(JSON_UNQUOTE(JSON_EXTRACT(p.gang, '$.label')), 'No Gang') as `Value` \nFROM players p \nWHERE p.citizenid = '${player_citizenid}'\nUNION ALL\nSELECT \n  'Nationality' as `Key`, JSON_UNQUOTE(JSON_EXTRACT(p.charinfo, '$.nationality')) as `Value` \nFROM players p WHERE p.citizenid = '${player_citizenid}'\nUNION ALL\nSELECT \n  'Phone' as `Key`, JSON_UNQUOTE(JSON_EXTRACT(p.charinfo, '$.phone')) as `Value` \nFROM players p WHERE p.citizenid = '${player_citizenid}'\nUNION ALL\nSELECT \n  'DOB' as `Key`, JSON_UNQUOTE(JSON_EXTRACT(p.charinfo, '$.birthdate')) as `Value` \nFROM players p WHERE p.citizenid = '${player_citizenid}'",
+          "refId": "A"
+        }
+      ],
+      "title": "Player Details",
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "mariadb-kifflom"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "id"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 57
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 6,
+        "x": 0,
+        "y": 10
+      },
+      "id": 107,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "11.6.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "mariadb-kifflom"
+          },
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT \n  p.id, \n  p.property_name as house \nFROM \n  properties p \nWHERE \n  p.owner = '${player_citizenid}' \nORDER BY \n  p.property_name;",
+          "refId": "A"
+        }
+      ],
+      "title": "Properties",
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "mariadb-kifflom"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": "left",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 18,
+        "x": 6,
+        "y": 10
+      },
+      "id": 106,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true
+      },
+      "pluginVersion": "11.6.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "mariadb-kifflom"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT \n  v.plate as Plate,\n  v.vehicle as Vehicle,\n  v.garage as Garage,\n  v.state as State,\n  JSON_UNQUOTE(JSON_EXTRACT(v.mods, '$.fuelLevel')) as Fuel, \n  JSON_UNQUOTE(JSON_EXTRACT(v.mods, '$.engineHealth')) as Engine, \n  JSON_UNQUOTE(JSON_EXTRACT(v.mods, '$.bodyHealth')) as Body \nFROM \n  player_vehicles v\nJOIN \n  players p ON v.citizenid = p.citizenid \nWHERE \n  p.citizenid = '${player_citizenid}' \nORDER BY \n  v.vehicle;",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "Player Vehicles",
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "deiwye95duzggb"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": false,
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 24,
+        "x": 0,
+        "y": 16
+      },
+      "id": 111,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": false
+      },
+      "pluginVersion": "11.6.0",
+      "targets": [
+        {
+          "dataset": "kifflom",
+          "datasource": {
+            "type": "mysql",
+            "uid": "deiwye95duzggb"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT \n  FLOOR((CAST(JSON_UNQUOTE(JSON_EXTRACT(item_data, '$.slot')) AS UNSIGNED) - 1) / 5) as `row`,\n  (CAST(JSON_UNQUOTE(JSON_EXTRACT(item_data, '$.slot')) AS UNSIGNED) - 1) % 5 as `column`,\n  CONCAT(\n    JSON_UNQUOTE(JSON_EXTRACT(item_data, '$.name')), \n    ' - ', \n    JSON_UNQUOTE(JSON_EXTRACT(item_data, '$.count')), \n    'x'\n  ) as value\nFROM \n  kifflom.players,\n  JSON_TABLE(inventory, '$[*]' COLUMNS (\n    item_data JSON PATH '$'\n  )) as items\nWHERE \n  citizenid = '${player_citizenid}'\nORDER BY \n  `row`, `column`\nLIMIT 50",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [
+                  {
+                    "name": "inventory",
+                    "type": "functionParameter"
+                  }
+                ],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50,
+            "whereJsonTree": {
+              "children1": [
+                {
+                  "id": "9989b998-cdef-4012-b456-719659ebfa05",
+                  "properties": {
+                    "field": "citizenid",
+                    "fieldSrc": "field",
+                    "operator": "equal",
+                    "value": [
+                      "${player_citizenid}"
+                    ],
+                    "valueError": [
+                      null
+                    ],
+                    "valueSrc": [
+                      "value"
+                    ],
+                    "valueType": [
+                      "text"
+                    ]
+                  },
+                  "type": "rule"
+                }
+              ],
+              "id": "b9ba8b88-0123-4456-b89a-b19659eb067f",
+              "type": "group"
+            },
+            "whereString": "citizenid = '${player_citizenid}'"
+          },
+          "table": "players"
+        }
+      ],
+      "title": "Inventory",
+      "transformations": [
+        {
+          "id": "groupingToMatrix",
+          "options": {
+            "columnField": "column",
+            "emptyValue": "empty",
+            "rowField": "row",
+            "valueField": "value"
+          }
+        },
+        {
+          "id": "filterFieldsByName",
+          "options": {
+            "byVariable": false,
+            "include": {
+              "names": [
+                "0",
+                "1",
+                "2",
+                "3",
+                "4"
+              ]
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "mariadb-kifflom"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto",
+              "wrapText": false
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Time"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 179
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Amount"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 69
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Type"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 107
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Title"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 251
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Issuer"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 142
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Message"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 358
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 26
+      },
+      "id": 108,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "11.6.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "mariadb-kifflom"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT \n  FROM_UNIXTIME(JSON_EXTRACT(t.value, '$.time')) as Time, \n  JSON_EXTRACT(t.value, '$.trans_type') as Type, \n  JSON_EXTRACT(t.value, '$.title') as Title,\n  JSON_EXTRACT(t.value, '$.amount') as Amount, \n  JSON_EXTRACT(t.value, '$.message') as Message, \n  JSON_EXTRACT(t.value, '$.issuer') as Issuer, \n  JSON_EXTRACT(t.value, '$.receiver') as Receiver\nFROM \n  player_transactions pt, \n  JSON_TABLE(pt.transactions, '$[*]' COLUMNS(\n    value JSON PATH '$'\n  )) as t \nWHERE \n  pt.id = '${player_citizenid}' \nORDER BY \n  JSON_EXTRACT(t.value, '$.time') DESC \nLIMIT 50;",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "Transaction History (Personal)",
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "mariadb-kifflom"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 35
+      },
+      "id": 109,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true
+      },
+      "pluginVersion": "11.6.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "mariadb-kifflom"
+          },
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT \n  FROM_UNIXTIME(b.timestamp) as date, \n  FROM_UNIXTIME(b.expire) as expires, \n  b.type as sanction, \n  b.reason, \n  b.bannedby as admin, \n  b.notes as note \nFROM \n  player_bans b \nJOIN \n  players p ON b.license = p.license \nWHERE \n  p.citizenid = '${player_citizenid}' \nORDER BY \n  b.timestamp DESC;",
+          "refId": "A"
+        }
+      ],
+      "title": "Sanctions",
+      "type": "table"
+    }
+  ],
+  "preload": false,
+  "refresh": "5s",
+  "schemaVersion": 41,
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "text": "Sjoerd Butsers",
+          "value": "GCD6DSM3"
+        },
+        "datasource": {
+          "type": "mysql",
+          "uid": "mariadb-kifflom"
+        },
+        "definition": "SELECT CONCAT(\n         CONCAT(JSON_UNQUOTE(JSON_EXTRACT(charinfo, '$.firstname')), ' ', \n                JSON_UNQUOTE(JSON_EXTRACT(charinfo, '$.lastname'))),\n         ' [', citizenid, ']'\n       ) AS player_info\nFROM players \nORDER BY citizenid",
+        "includeAll": false,
+        "name": "player_citizenid",
+        "options": [],
+        "query": "SELECT CONCAT(\n         CONCAT(JSON_UNQUOTE(JSON_EXTRACT(charinfo, '$.firstname')), ' ', \n                JSON_UNQUOTE(JSON_EXTRACT(charinfo, '$.lastname'))),\n         ' [', citizenid, ']'\n       ) AS player_info\nFROM players \nORDER BY citizenid",
+        "refresh": 1,
+        "regex": "^(?<text>.+?)\\s+\\[(?<value>[A-Z0-9]+)\\]$",
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {
+    "hidden": true
+  },
+  "timezone": "",
+  "title": "Player Information Dashboard",
+  "uid": "player-info-dashboard",
+  "version": 26
+}
