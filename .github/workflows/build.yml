@@ -32,7 +32,7 @@ jobs:
         git config --global user.email 'github-actions[bot]@users.noreply.github.com'
         git checkout --orphan main-build
         find . -maxdepth 1 ! -name '.git' ! -name '.' -exec rm -rf {} +
-        cp -r build/* .
+        cp -a build/. .
         git add .
         git commit -m "Build from ${{ github.sha }}"
         git push -f origin main-build
