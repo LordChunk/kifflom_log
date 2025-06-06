@@ -10,7 +10,7 @@ jobs:
   build:
     uses: ./.github/workflows/reusable-build.yml
 
-  deploy:
+  push-build-artifact:
     needs: build
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
