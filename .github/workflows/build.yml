@@ -9,3 +9,30 @@ on:
 jobs:
   build:
     uses: ./.github/workflows/reusable-build.yml
+
+  deploy:
+    needs: build
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Download build artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: ${{ needs.build.outputs.artifact_name }}
+        path: ./build/
+
+    - name: Deploy to main-build branch
+      run: |
+        git config --global user.name 'github-actions[bot]'
+        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+        git checkout --orphan main-build
+        find . -maxdepth 1 ! -name '.git' ! -name '.' -exec rm -rf {} +
+        cp -r build/* .
+        git add .
+        git commit -m "Build from ${{ github.sha }}"
+        git push -f origin main-build
