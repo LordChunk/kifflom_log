@@ -18,10 +18,5 @@ server_scripts {
   'server/*.js'
 }
 
-dependencies {
-  '/server:12913', -- Node.js 22 support
-}
-
-node_version '22'
 lua54 'yes'
 use_experimental_fxv2_oal 'yes'
