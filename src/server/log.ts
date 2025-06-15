@@ -1,3 +1,5 @@
+import fetch from 'node-fetch';
+
 interface LogStream {
   stream: Record<string, string>;
   values: [string, string][];
