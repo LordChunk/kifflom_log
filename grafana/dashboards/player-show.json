@@ -538,7 +538,7 @@
     {
       "datasource": {
         "type": "mysql",
-        "uid": "deiwye95duzggb"
+        "uid": "mariadb-kifflom"
       },
       "fieldConfig": {
         "defaults": {
@@ -590,7 +590,7 @@
           "dataset": "kifflom",
           "datasource": {
             "type": "mysql",
-            "uid": "deiwye95duzggb"
+            "uid": "mariadb-kifflom"
           },
           "editorMode": "code",
           "format": "table",
