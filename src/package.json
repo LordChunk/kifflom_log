@@ -5,7 +5,7 @@
     "node-fetch": "^3.3.2"
   },
   "devDependencies": {
-    "@types/node": "^25.6.0",
+    "@types/node": "^26.0.0",
     "cross-env": "^10.1.0",
     "esbuild": "^0.28.0",
     "rimraf": "^6.1.3"
